@@ -38,7 +38,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.less'],
     alias: {
       'vue': 'mpvue',
       '@': resolve('src')
@@ -51,6 +51,10 @@ module.exports = {
         test: /\.vue$/,
         loader: 'mpvue-loader',
         options: vueLoaderConfig
+      },
+      {
+        test: /\.less$/,
+        loader: 'less-loader'
       },
       {
         test: /\.js$/,

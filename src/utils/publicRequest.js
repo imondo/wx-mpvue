@@ -23,9 +23,11 @@ class publicRequest {
     })
   }
 
-  static post ({url, data={}, isJson=false}) {
+  static post ({url, data={}, isJson=false, hasToken=true}) {
 
     let contentType = isJson ? 'application/json' : 'application/x-www-form-urlencoded';
+
+    let header = Object.assign({'content-type': contentType}, hasToken ? {'Authorization': Authorization}: {})
 
     wx.showLoading({
       title: '加载中...'
@@ -33,10 +35,7 @@ class publicRequest {
     return new Promise((resolve, reject) => {
       wx.request({
         url,
-        header: {
-          'content-type': contentType,
-          'Authorization': Authorization
-        },
+        header,
         method: 'POST',
         data,
         dataType: 'json',

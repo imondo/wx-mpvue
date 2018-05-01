@@ -34,19 +34,21 @@ export default {
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
+    },
+    handleToast () {
+      this.$totast.confirm({content: 'hehe', callback: (res) => {
+          console.log(res);
+          this.publicRequest.get({url: '/api/classes/article'}).then(res => {
+            console.log(res);
+          })
+        }})
     }
   },
 
   created () {
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+    // this.getUserInfo()
 
-    this.$totast.confirm({content: 'hehe', callback: (res) => {
-        console.log(res);
-        this.publicRequest.get({url: '/api/classes/article'}).then(res => {
-          console.log(res);
-        })
-      }})
   }
 }
 </script>

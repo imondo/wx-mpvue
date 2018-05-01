@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import store from './stores/index'
 import PrivateComponents from './components/index'
 import toast from './utils/toast'
 import publicRequest from './utils/publicRequest'
@@ -8,6 +9,8 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 Vue.use(PrivateComponents)
+
+Vue.prototype.store = store
 
 Vue.prototype.$totast = toast
 
@@ -20,7 +23,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: ['pages/index/main'],
+    pages: ['^pages/login/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
