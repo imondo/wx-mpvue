@@ -18,6 +18,9 @@ class publicRequest {
         fail: (error) => {
           totast.msg(error.errMsg, {});
           reject(error)
+        },
+        complete: () => {
+          wx.hideLoading();
         }
       })
     })
@@ -40,13 +43,14 @@ class publicRequest {
         data,
         dataType: 'json',
         success: (res) => {
-          wx.hideLoading();
           resolve(res.data);
         },
         fail: (error) => {
-          wx.hideLoading();
           totast.msg(error.errMsg, {});
           reject(error);
+        },
+        complete: () => {
+          wx.hideLoading();
         }
       })
     })

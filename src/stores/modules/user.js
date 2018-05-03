@@ -20,7 +20,7 @@ const user = {
       const password = sha256(loginForm.password.trim());
       return new Promise((resolve, reject) => {
         publicRequest.post({
-          url: 'https://hebei.zbglxt.com/passport/login',
+          url: 'http://test.ems.com/iportalpassport/login',
           isJson: false,
           hasToken: false,
           data: {
@@ -28,7 +28,6 @@ const user = {
             password
           }
         }).then(res => {
-          console.log(res);
           resolve(res)
         }).catch(error => {
           reject(error)

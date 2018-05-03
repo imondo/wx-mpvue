@@ -10,7 +10,7 @@ App.mpType = 'app'
 
 Vue.use(PrivateComponents)
 
-Vue.prototype.store = store
+Vue.prototype.$store = store
 
 Vue.prototype.$totast = toast
 
@@ -26,9 +26,9 @@ export default {
     pages: ['^pages/login/main'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#2574a9',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: '#fff'
     }
   }
 };
