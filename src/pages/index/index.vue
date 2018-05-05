@@ -38,7 +38,7 @@ export default {
     handleToast () {
       this.$totast.confirm({content: 'hehe', callback: (res) => {
           console.log(res);
-          this.publicRequest.get({url: '/api/classes/article'}).then(res => {
+          this.publicRequest.get({url: 'https://imondo.cn/api/classes/article', isJson: true, hasToken: false}).then(res => {
             console.log(res);
           })
         }})

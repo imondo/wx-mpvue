@@ -1,5 +1,6 @@
-import publicRequest from './../../utils/publicRequest'
-import sha256 from 'js-sha256'
+import sha256 from 'crypto-js/sha256'
+import handleUser from './../../api/user'
+import handleToken from './../../utils/token'
 
 const user = {
   state: {
@@ -15,24 +16,13 @@ const user = {
     }
   },
   actions: {
-    LoginState({commit}, loginForm) {
+    async LoginState({commit}, loginForm) {
       const username = loginForm.username.trim();
       const password = sha256(loginForm.password.trim());
-      return new Promise((resolve, reject) => {
-        publicRequest.post({
-          url: 'http://test.ems.com/iportalpassport/login',
-          isJson: false,
-          hasToken: false,
-          data: {
-            username,
-            password
-          }
-        }).then(res => {
-          resolve(res)
-        }).catch(error => {
-          reject(error)
-        })
-      })
+      const token = await handleUser.login(username, password);
+      commit('SET_TOKEN', token);
+      handleToken.set({data: token});
+      return token;
     }
   }
 }

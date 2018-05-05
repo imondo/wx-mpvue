@@ -23,7 +23,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: ['^pages/login/main'],
+    pages: ['^pages/login/main', 'pages/location/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#2574a9',

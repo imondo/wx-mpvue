@@ -5,7 +5,7 @@
       <form class="form">
         <view class="form-group">
           <image src="/static/images/school.png"></image>
-          <input class="form-control" v-model="loginForm.schoolName" placeholder="请输入地区"/>
+          <input class="form-control" v-model="loginForm.schoolName" @tap="bindViewTap" placeholder="请输入地区"/>
         </view>
         <view class="form-group">
           <image src="/static/images/user.png"></image>
@@ -37,16 +37,17 @@
     data: () => ({
       loginForm: {
         username: 'admin',
-        password: 'lyadmin123'
+        password: '123456'
       }
     }),
     methods: {
-      login() {
-        console.log(this.loginForm)
-        this.$store.dispatch('LoginState', this.loginForm).then(res => {
-          console.log(res);
-        })
-      }
+      async login() {
+        this.$store.dispatch('LoginState', this.loginForm);
+      },
+      bindViewTap () {
+        const url = '../location/main'
+        wx.navigateTo({ url })
+      },
     }
   }
 </script>
