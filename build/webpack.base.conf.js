@@ -38,7 +38,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.less'],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
       '@': resolve('src')
@@ -48,13 +48,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'mpvue-loader',
         options: vueLoaderConfig
-      },
-      {
-        test: /\.less$/,
-        loader: 'less-loader'
       },
       {
         test: /\.js$/,

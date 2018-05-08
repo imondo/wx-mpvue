@@ -21,7 +21,5 @@ export default {
 </script>
 
 <style>
-  @import "styles/weui.less";
   @import "styles/app.less";
-  @import "styles/form.less";
 </style>

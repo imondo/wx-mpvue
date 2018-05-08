@@ -3,6 +3,8 @@ import App from './App'
 import store from './stores/index'
 import PrivateComponents from './components/index'
 import toast from './utils/toast'
+import handleStorage from './utils/local'
+import handleScan from './utils/scanCode'
 import publicRequest from './utils/publicRequest'
 
 Vue.config.productionTip = false
@@ -14,21 +16,23 @@ Vue.prototype.$store = store
 
 Vue.prototype.$totast = toast
 
-Vue.prototype.publicRequest = publicRequest
+Vue.prototype.$handleStorage = handleStorage
+
+Vue.prototype.$handleScan = handleScan
+
+Vue.prototype.$http = publicRequest
 
 const app = new Vue(App)
 app.$mount()
 
-
-
 export default {
   config: {
-    pages: ['^pages/login/main', 'pages/location/main'],
+    pages: ['^pages/login/main', 'pages/cancode/main'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#2574a9',
+      navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: '#fff'
+      navigationBarTextStyle: 'black'
     }
   }
-};
+}

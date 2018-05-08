@@ -6,7 +6,6 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '登录',
-    navigationBarBackgroundColor: "#20434a"
+    navigationBarTitleText: '登录'
   }
 }

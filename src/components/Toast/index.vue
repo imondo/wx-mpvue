@@ -1,5 +1,6 @@
 <template>
   <div>
+    tost
   </div>
 </template>
 
@@ -10,8 +11,8 @@
 <script type='text/ecmascript-6'>
   export default {
     name: 'MoToast',
-    created() {
+    created () {
       console.log('demo')
     }
-  };
+  }
 </script>

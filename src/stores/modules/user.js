@@ -1,7 +1,3 @@
-import sha256 from 'crypto-js/sha256'
-import handleUser from './../../api/user'
-import handleToken from './../../utils/token'
-
 const user = {
   state: {
     token: null,
@@ -16,13 +12,9 @@ const user = {
     }
   },
   actions: {
-    async LoginState({commit}, loginForm) {
-      const username = loginForm.username.trim();
-      const password = sha256(loginForm.password.trim());
-      const token = await handleUser.login(username, password);
-      commit('SET_TOKEN', token);
-      handleToken.set({data: token});
-      return token;
+    async Login ({commit}, loginForm) {
+      commit('SET_USER_INFO', loginForm)
+      return loginForm
     }
   }
 }
