@@ -1,7 +1,11 @@
 <template>
-  <view>
-    <view @tap="scanCodeInfo">扫码</view>
-    <view>{{codeInfo}}</view>
+  <view class="scan-wrapper">
+    <view @tap="scanCodeInfo">
+      <span class="icon icon-saoyisao"></span>
+    </view>
+    <view>
+      <span class="icon icon-hebingxingzhuang"></span>{{codeInfo}}
+    </view>
   </view>
 </template>
 
@@ -21,6 +25,12 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .scan-wrapper {
+    text-align: center;
+    height: 100%;
+    .icon {
+      font-size: 60rpx;
+    }
+  }
 </style>

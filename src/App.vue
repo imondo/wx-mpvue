@@ -21,5 +21,6 @@ export default {
 </script>
 
 <style>
+  @import "styles/iconfont.less";
   @import "styles/app.less";
 </style>
