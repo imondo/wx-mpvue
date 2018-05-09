@@ -83,12 +83,21 @@ class publicRequest {
 }
 
 const checkNetWork = function () {
-  let hasNetWork = false
-  wx.onNetworkStatusChange(function (res) {
-    console.log(res.networkType)
-    hasNetWork = res.isConnected
+  return new Promise(resolve => {
+    wx.getNetworkType({
+      success: res => {
+        let networkType = res.networkType;
+        if (networkType === 'none' || networkType === 'unknown') {
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      },
+      fail: () => {
+        resolve(false)
+      }
+    })
   })
-  return hasNetWork
 }
 
 const totastMessage = function ({statusCode, message}) {
