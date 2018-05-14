@@ -25,6 +25,9 @@
         password: 'admin123'
       }
     }),
+    created () {
+      console.log(88)
+    },
     methods: {
       async login () {
         let user = await this.$store.dispatch('Login', this.loginForm)

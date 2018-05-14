@@ -48,8 +48,8 @@
         this.confimIndex = _index
       },
       handleDelete () {
-        console.log(222)
         this.$emit('handleDel')
+        wx.navigateTo({url: '../pullDownRefresh/main'})
       }
     }
   }
