@@ -11,8 +11,7 @@
 			console.log(111)
 		},
 		onPullDownRefresh () {
-			console.log(222)
-			wx.stopPullDownRefresh()
+      wx.stopPullDownRefresh()
 		}
 	}
 </script>
