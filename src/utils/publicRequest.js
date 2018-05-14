@@ -1,4 +1,4 @@
-import totast from './toast'
+import toast from './toast'
 
 const Authorization = 'Bearer xxx'
 class publicRequest {
@@ -6,7 +6,7 @@ class publicRequest {
     let hasNetWork = checkNetWork()
 
     if (!hasNetWork) {
-      totast.msg('网路异常', {})
+      toast.msg('网路异常', {})
       return false
     }
 
@@ -27,7 +27,7 @@ class publicRequest {
           }
         },
         fail: (error) => {
-          totast.msg(error.errMsg, {})
+          toast.msg(error.errMsg, {})
           reject(error)
         },
         complete: res => {
@@ -47,7 +47,7 @@ class publicRequest {
     let hasNetWork = checkNetWork()
 
     if (!hasNetWork) {
-      totast.msg('网路异常', {})
+      toast.msg('网路异常', {})
       return false
     }
     let contentType = isJson ? 'application/json' : 'application/x-www-form-urlencoded'
@@ -65,7 +65,7 @@ class publicRequest {
           resolve(res.data)
         },
         fail: (error) => {
-          totast.msg(error.errMsg, {})
+          toast.msg(error.errMsg, {})
           reject(error)
         },
         complete: res => {
@@ -86,7 +86,7 @@ const checkNetWork = function () {
   return new Promise(resolve => {
     wx.getNetworkType({
       success: res => {
-        let networkType = res.networkType;
+        let networkType = res.networkType
         if (networkType === 'none' || networkType === 'unknown') {
           resolve(false)
         } else {
@@ -103,10 +103,10 @@ const checkNetWork = function () {
 const totastMessage = function ({statusCode, message}) {
   switch (statusCode) {
     case 502:
-      totast.msg('服务器异常', {})
+      toast.msg('服务器异常', {})
       break
     default:
-      totast.msg(message, {})
+      toast.msg(message, {})
       break
   }
 }

@@ -27,7 +27,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: ['^pages/login/main', 'pages/cancode/main'],
+    pages: ['^pages/login/main', 'pages/cancode/main', 'pages/slide-del/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

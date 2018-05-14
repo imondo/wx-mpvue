@@ -4,7 +4,7 @@
       <span class="icon icon-saoyisao"></span>
     </view>
     <view>
-      <span class="icon icon-hebingxingzhuang"></span>{{codeInfo}}
+      <span class="icon icon-hebingxingzhuang" @tap="navTo"></span>{{codeInfo}}
     </view>
   </view>
 </template>
@@ -20,6 +20,9 @@
         let goods = await this.$handleScan()
         console.log(goods)
         this.codeInfo = goods.result
+      },
+      navTo () {
+        wx.navigateTo({url: '../slide-del/main'})
       }
     }
   }
