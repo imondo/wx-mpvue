@@ -4,7 +4,7 @@ console.log(process.env)
 
 const Authorization = 'Bearer xxx'
 class publicRequest {
-  static async get ({url, data = {}, isJson = false, hasToken = true, header}) {
+  static async get ({url, data = {}, isJson = false, hasToken = true, isLoading = true, header}) {
     let hasNetWork = checkNetWork()
 
     if (!hasNetWork) {
@@ -15,7 +15,7 @@ class publicRequest {
     let contentType = isJson ? 'application/json' : 'application/x-www-form-urlencoded'
     let _authorization = hasToken ? {'Authorization': Authorization} : {}
     let _header = Object.assign({'content-type': contentType}, _authorization, header)
-    wx.showLoading({title: '加载中...'})
+    isLoading && wx.showLoading({title: '加载中...'})
     return new Promise((resolve, reject) => {
       wx.request({
         url,
@@ -39,7 +39,7 @@ class publicRequest {
               message: res.data.msg
             })
           }
-          wx.hideLoading()
+          isLoading && wx.hideLoading()
         }
       })
     })
