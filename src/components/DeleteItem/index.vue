@@ -1,28 +1,65 @@
 <template>
-  <view class="slide-wrapper">
-    {{list.length}}
-    <view class="item" v-for="(item, index) in list" :key="item._id">
-        <span class="item-content" :data-index="index" @touchstart="touchStart" @touchmove="touchMove" :class="{'delete-active': countIndex === index, 'handle-confim': confimIndex === index}">
-        {{item.title}}
-        </span>
-      <span class="icon delete" :data-index="index" :class="{'delete-index': confimIndex === index}" @tap="deleteConfim">删除</span>
-      <span class="icon handle-delete" :class="{'delete-index': confimIndex === index}" @tap="handleDelete">确认删除</span>
-    </view>
+  <view class="item">
+    <span class="item-content" :data-index="index" @touchstart="touchStart" @touchmove="touchMove" :class="{'delete-active': countIndex === index, 'handle-confim': confimIndex === index}">
+      <!--<slot name="items"></slot>-->
+      {{item.title}}
+    </span>
+    <span class="icon delete" :data-index="index" :class="{'delete-index': confimIndex === index}" @tap="deleteConfim">删除</span>
+    <span class="icon handle-delete" :class="{'delete-index': confimIndex === index}" @tap="handleDelete">确认删除</span>
   </view>
 </template>
 
 <script>
-  import slideDelMixins from './../../mixins/slide-del-mixins'
+  // import slideDelMixins from './../../mixins/slide-del-mixins'
 
   export default {
-    mixins: [slideDelMixins],
+    name: 'DeleteItem',
+    // mixins: [slideDelMixins],
+    props: {
+      index: {
+        required: true,
+        type: Number,
+        default: -10
+      },
+      item: {
+        required: true,
+        type: Object,
+        default: {}
+      }
+    },
     data: () => ({
-      list: []
+      countIndex: -1,
+      confimIndex: -1,
+      clientX: 0
     }),
     onLoad () {
-      this.getList();
+      console.log(this.index)
+      // this.getList();
     },
     methods: {
+      touchStart (e) {
+        this.clientX = e.clientX
+      },
+      touchMove (e) {
+        let moveX = e.clientX
+        let x = moveX - this.clientX
+        let _index = e.target.dataset.index
+        console.log(x)
+        // left
+        if (x <= -40) {
+          this.countIndex = _index
+          this.confimIndex = -1
+        }
+        // right
+        if (x > 40) {
+          this.confimIndex = -1
+          this.countIndex = -1
+        }
+      },
+      deleteConfim (e) {
+        let _index = e.target.dataset.index
+        this.confimIndex = _index
+      },
       async getList () {
         let list = await this.$http.get({
           url: `http://api.zhuishushenqi.com/ranking/54d43437d47d13ff21cad58b`,
@@ -40,7 +77,7 @@
 
     },
     async onPullDownRefresh () {
-      this.$pullDownRefresh({callback: this.getList()})
+      // this.$pullDownRefresh({callback: this.getList()})
     }
   }
 </script>

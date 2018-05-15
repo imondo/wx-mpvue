@@ -1,21 +1,16 @@
 <template>
-  <view class="load-more">
+  <view class="load-more-wrapper">
     <view class="section__title">vertical scroll</view>
-    <toast></toast>
-    <scroll-view class="section-scroll" scroll-y :style="{height: scrollHeight}" lower-threshold="150" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll" :scroll-top="scrollTop">
-      <view class="scroll-view-item bc_green" v-for="(item, index) in list" :key="index">{{item.title}}</view>
+    <scroll-view class="section-scroll" scroll-y enable-back-to-top="true" :style="{height: scrollHeight}" lower-threshold="150" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll" :scroll-top="scrollTop">
+      <slot name="content"></slot>
       <view class="loading" :class="{hidden: isHidden}">加载中...</view>
     </scroll-view>
   </view>
 </template>
 
 <script>
-  import Toast from './../../components/Toast/index'
-
   export default {
-    components: {
-      Toast
-    },
+    name: 'LoadMore',
     data: () => ({
       list: [],
       scrollHeight: 0,
@@ -28,7 +23,7 @@
           this.scrollHeight = (res.windowHeight - 19) + 'px';
         }
       });
-      this.getList();
+      // this.getList();
     },
     methods: {
       upper () {
@@ -37,7 +32,8 @@
       lower () {
         console.log(888)
         this.isHidden = true
-        this.getList()
+        this.$emit('loadMore')
+        // this.getList()
       },
       scroll (e) {
         // this.scrollTop = e.mp.detail.scrollTop
@@ -55,8 +51,6 @@
   }
 </script>
 
-<style lang="less" scoped>
-  .load-more {
-    height: 100%;
-  }
+<style scoped>
+
 </style>

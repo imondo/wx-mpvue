@@ -2,8 +2,6 @@ export default {
   data: () => ({
     countIndex: -1,
     confimIndex: -1,
-    isDelate: false,
-    isConfim: false,
     clientX: 0
   }),
   methods: {
