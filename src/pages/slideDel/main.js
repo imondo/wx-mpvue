@@ -8,7 +8,9 @@ export default {
   config: {
     navigationBarTitleText: '删除demo',
     navigationBarBackgroundColor: '#007CDE',
-    navigationBarTextStyle: 'light'
+    navigationBarTextStyle: 'light',
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark'
   },
   disableScrol: true
 }

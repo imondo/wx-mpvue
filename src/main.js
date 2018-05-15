@@ -30,7 +30,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: ['pages/login/main', 'pages/cancode/main', '^pages/slide-del/main', 'pages/pullDownRefresh/main'],
+    pages: ['pages/login/main', 'pages/cancode/main', '^pages/slideDel/main', 'pages/pullDownRefresh/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

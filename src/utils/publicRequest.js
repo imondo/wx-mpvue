@@ -1,8 +1,10 @@
 import toast from './toast'
 
+console.log(process.env)
+
 const Authorization = 'Bearer xxx'
 class publicRequest {
-  static get ({url, data = {}, isJson = false, hasToken = true, header}) {
+  static async get ({url, data = {}, isJson = false, hasToken = true, header}) {
     let hasNetWork = checkNetWork()
 
     if (!hasNetWork) {
@@ -43,7 +45,7 @@ class publicRequest {
     })
   }
 
-  static post ({url, data = {}, isJson = false, hasToken = true, header}) {
+  static async post ({url, data = {}, isJson = false, hasToken = true, header}) {
     let hasNetWork = checkNetWork()
 
     if (!hasNetWork) {

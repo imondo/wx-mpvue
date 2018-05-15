@@ -1,8 +1,9 @@
 <template>
-  <view>
-    <view class="item" v-for="(item, index) in arrDatas" :key="item">
+  <view class="slide-wrapper">
+    {{list.length}}
+    <view class="item" v-for="(item, index) in list" :key="item._id">
         <span class="item-content" :data-index="index" @touchstart="touchStart" @touchmove="touchMove" :class="{'delete-active': countIndex === index, 'handle-confim': confimIndex === index}">
-        {{item}}
+        {{item.title}}
         </span>
       <span class="icon delete" :data-index="index" :class="{'delete-index': confimIndex === index}" @tap="deleteConfim">删除</span>
       <span class="icon handle-delete" :class="{'delete-index': confimIndex === index}" @tap="handleDelete">确认删除</span>
@@ -11,51 +12,44 @@
 </template>
 
 <script>
+  import slideDelMixins from './../../mixins/slide-del-mixins'
+
   export default {
     name: 'deleteItem',
+    mixins: [slideDelMixins],
     data: () => ({
-      arrDatas: [1, 2, 3],
-      countIndex: -1,
-      confimIndex: -1,
-      isDelate: false,
-      isConfim: false,
-      clientX: 0
+      list: []
     }),
-    created () {
-      console.log(typeof this.index, this.index)
+    onLoad () {
+      this.getList();
     },
     methods: {
-      touchStart (e) {
-        this.clientX = e.clientX
+      async getList () {
+        let list = await this.$http.get({
+          url: `http://api.zhuishushenqi.com/ranking/54d43437d47d13ff21cad58b`,
+          hasToken: false
+        })
+        this.list = list.ranking.books;
       },
-      touchMove (e) {
-        let moveX = e.clientX
-        let x = moveX - this.clientX
-        let _index = e.target.dataset.index
-        // left
-        if (x <= -40) {
-          this.countIndex = _index
-          this.confimIndex = -1
-        }
-        // right
-        if (x > 40) {
-          this.confimIndex = -1
-          this.countIndex = -1
-        }
-      },
-      deleteConfim (e) {
-        let _index = e.target.dataset.index
-        this.confimIndex = _index
-      },
-      handleDelete () {
-        this.$emit('handleDel')
-        wx.navigateTo({url: '../pullDownRefresh/main'})
+      handleDelete (e) {
+        // wx.navigateTo({url: '../pullDownRefresh/main'})
+        console.log(e, this.confimIndex);
+        this.list.splice(this.confimIndex, 1); // 删除数据
+        this.confimIndex = -1;
+        this.countIndex = -1;
       }
+
+    },
+    async onPullDownRefresh () {
+      this.$pullDownRefresh({callback: this.getList()})
     }
   }
 </script>
 
 <style lang="less" scoped>
+  .slide-wrapper {
+    overflow: hidden;
+  }
   .item {
     position: relative;
     display: flex;
@@ -64,7 +58,9 @@
     align-items: center;
     border-bottom: 1rpx solid #ccc;
     .item-content {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      padding-left: 20rpx;
       position: absolute;
       top: 0;
       bottom: 0;
