@@ -16,6 +16,7 @@
 			console.log(111)
       this.getList({});
 		},
+<<<<<<< HEAD
     methods: {
 		  async getList ({pageSize = 9}) {
         let list = await this.$http.get({
@@ -28,6 +29,10 @@
     },
 		async onPullDownRefresh () {
       this.$pullDownRefresh({callback: this.getList({pageSize: 15})})
+=======
+		onPullDownRefresh () {
+      wx.stopPullDownRefresh()
+>>>>>>> f16e8a993f66655cf13e69f39c5643ea9d69bb97
 		}
 	}
 </script>
