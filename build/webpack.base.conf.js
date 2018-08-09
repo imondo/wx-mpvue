@@ -43,19 +43,12 @@ module.exports = {
       'vue': 'mpvue',
       '@': resolve('src')
     },
-    symlinks: false
+    symlinks: false,
+    aliasFields: ['mpvue', 'weapp', 'browser'],
+    mainFields: ['browser', 'module', 'main']
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
@@ -87,7 +80,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('media/[name]].[ext]')
+          name: utils.assetsPath('media/[name].[ext]')
         }
       },
       {
