@@ -4,7 +4,8 @@
       <span class="icon icon-saoyisao"></span>
     </view>
     <view>
-      <span class="icon icon-hebingxingzhuang" @tap="navTo"></span>{{codeInfo}}
+      <span class="icon icon-hebingxingzhuang" @tap="navTo"></span>
+      <p v-for="(vlaue, key) in codeInfo" :key="key">{{key}}: {{vlaue}}</p>
     </view>
   </view>
 </template>
@@ -13,7 +14,9 @@
   export default {
     name: 'scanCode',
     data: () => ({
-      codeInfo: {}
+      codeInfo: {
+        
+      }
     }),
     methods: {
       async scanCodeInfo () {
@@ -22,7 +25,7 @@
         this.codeInfo = goods.result
       },
       navTo () {
-        wx.navigateTo({url: '../slide-del/main'})
+        wx.navigateTo({url: '../slideDel/main'})
       }
     }
   }

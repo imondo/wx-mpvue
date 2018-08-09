@@ -31,12 +31,12 @@ app.$mount()
 export default {
   config: {
     pages: [
-      'pages/login/main',
+      '^pages/login/main',
       'pages/cancode/main',
       'pages/slideDel/main',
       'pages/pullDownRefresh/main',
       'pages/loadMore/main',
-      '^pages/componentDemo/main'
+      'pages/componentDemo/main'
     ],
     window: {
       backgroundTextStyle: 'light',
